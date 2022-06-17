@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 export class FormComponent implements OnInit {
 
 
-  title= " Form"
+  title= " Form";
 
 
 
