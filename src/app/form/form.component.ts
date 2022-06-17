@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 export class FormComponent implements OnInit {
 
 
-  title= " Form";
+  title= " Form"
 
 
 
@@ -91,7 +91,7 @@ lists:any;
  
   onSubmit(){
     this.submitted=true;
-    console.log(this.testForm.value.items);
+    console.log(this.testForm.value.items)
     if (this.testForm.invalid) {
       return;
   }else{this.lists.push(this.testForm.value)
