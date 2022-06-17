@@ -1,0 +1,172 @@
+
+<div class="container">
+    <h1>{{title}}</h1>
+    <hr>
+    <div class="card-body">
+        <form class="form" [formGroup]="testForm" (ngSubmit)="onSubmit()">
+            <div formArrayName="items"  
+            *ngFor="let item of testForm.get('items')?.value; let i = index;">  
+            <div [formGroupName]="item">  
+
+            
+
+                <div class="form-group">
+                    <label>firstname:</label>
+                    <input type="text" class="form-control" id="firstname" formControlName="firstname" [(ngModel)]="item.firstname" placeholder="enter firstname">
+                    <small class="text-danger" *ngIf="!testForm.get('firstname')?.valid && testForm.get('firstname')?.touched"
+                    >This Field is invalid</small>
+                
+            </div>
+            <div class="form-group">
+                <label>lastname:</label>
+                <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="enter lastname">
+                
+                
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <div>
+                    <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+                    <label for="male">Male</label>
+                </div>
+                
+                <div>
+                    <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+                    <label for="female">Female</label>
+                </div>
+                
+                <small class="text-danger" *ngIf="!testForm.get('gender')?.valid && testForm.get('gender')?.touched"
+                >This Field is required</small>
+                
+                
+            </div>
+            <div class="form-group">
+                <label>Dob:</label>
+                <input type="date" class="form-control" id="dob" formControlName="dob">
+                <small class="text-danger" *ngIf="!testForm.get('dob')?.valid && testForm.get('dob')?.touched"
+                >dob is required</small>
+            </div>
+            <div class="form-group">
+                <label>phone number:</label>
+                <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="enter phone number">
+                <small class="text-danger" *ngIf="!testForm.get('phone')?.valid && testForm.get('phone')?.touched"
+                >This Field is invalid</small>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="enter email">
+                <small class="text-danger" *ngIf="!testForm.get('email')?.valid && testForm.get('email')?.touched"
+                >Email is invalid</small>
+                
+            </div><br><br>
+    </div>
+    <button 
+    class="col btn btn-outline-danger" 
+    (click)="removeFeature(i)">
+    remove
+  </button>
+    </div>
+    
+            <a type="button" (click)="addNewuser()" class="text text-primary">Add new user</a><br><br>
+            <button type="submit"
+            class="btn btn-success">
+            Submit
+        </button>
+    
+    
+</form>
+</div>
+<hr>
+<div *ngIf="submitted">
+<table class="table table-striped table-bordered">    
+    <thead>    
+        <tr>    
+                
+            <th>Firstname</th>    
+            <th>Lastname</th>    
+            <th>gender</th>    
+            <th>DOB</th>    
+            <th>Phone number</th>    
+            <th>E-mail</th> 
+            <th>Action</th>      
+        </tr>    
+        </thead>
+<tbody>
+    <tr *ngFor="let list of lists; let i=index;">
+        
+        <td>
+            <div *ngIf="list.isEdit">
+                <input type="text" formControlName="list.lastname" class="form-control">
+            </div>
+            <div *ngIf="!list.isEdit">
+                {{list.firstname}}
+            </div>
+        </td>
+        <td>
+            <div *ngIf="list.isEdit">
+                <input type="text" formControlName="list.lastname" class="form-control">
+            </div>
+            <div *ngIf="!list.isEdit">
+                {{list.lastname}}
+
+            </div>
+        </td>
+        <td>
+            
+            <div *ngIf="list.isEdit">
+                <input type="text" formControlName="list.lastname" class="form-control">
+            </div>
+
+            <div *ngIf="!list.isEdit">
+
+                {{list.gender}}
+            </div>
+        </td>
+        <td>
+        
+        <div *ngIf="list.isEdit">
+            <input type="text" formControlName="list.lastname" class="form-control">
+        </div>
+        <div *ngIf="!list.isEdit">
+
+            {{list.dob}}
+        </div>
+    </td>
+        <td>
+            <div *ngIf="list.isEdit">
+                <input type="text" formControlName="list.lastname" class="form-control">
+            </div>
+            <div *ngIf="!list.isEdit">
+
+                {{list.phone}}
+            </div>
+        </td>
+        <td>
+            
+            <div *ngIf="list.isEdit">
+                <input type="text" formControlName="list.lastname" class="form-control">
+            </div>
+            <div *ngIf="!list.isEdit">
+            {{list.email}}
+        </div></td>
+        <td>
+            <div *ngIf="list.isEdit">
+            <button type="button" class="btn-btn-success">save</button>
+            <button type="button" class="btn-btn-success" (click)= "list.isEdit=false">cancel</button>
+
+
+                </div>
+            <button type="button" class="btn-btn-success" (click)="onEdit(list)">edit</button>
+            <button type="button" class="btn-btn-success" (click)="deleteData(list)">Delete</button>
+        </td>
+    </tr>
+       
+</tbody>
+
+ </table>
+        
+
+
+</div>
+    
+
